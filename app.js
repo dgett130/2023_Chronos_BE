@@ -19,7 +19,7 @@ app.use(express.json());
 
 app.use('/status',logger)
 app.use('/about',[logger, auth])
-app.use("/api/projects", projects_routes);
+app.use("/api/project", logger, projects_routes);
 
 /**** ROUTES ****/
 
