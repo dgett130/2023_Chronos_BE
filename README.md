@@ -1,7 +1,11 @@
+# How to start
+1. Start MongoDb server
+2. node app.js
+
 ## Project Structure
 1. `config/`: Contains configuration files for the db and server.
 2. `controllers/`: Contains the JS controller files.
-3. `middleware/`: Contains the middleware ifles for authentication and validation
+3. `middleware/`: Contains the middleware files for authentication and validation
 4. `migrations/`: Contains the migration class files of our database (here, tables of db since SQL is used).
 5. `models/`: Contains the JS model files of our ORM.
 6. `routes/`: Contains the JS route files to route requests to controllers.
