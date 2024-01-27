@@ -1,6 +1,6 @@
 # How to start
 1. Start MongoDb server
-2. node app.js
+2. node app.js to start the server
 
 ## Project Structure
 1. `config/`: Contains configuration files for the db and server.
