@@ -1,4 +1,5 @@
 const { getConnection } = require('../config/mongoClient');
+const {ObjectId} = require("mongodb");
 
 async function getProjects() {
     const conn = await getConnection();
@@ -11,7 +12,8 @@ async function getProjects() {
 async function getProject(id) {
     const conn = await getConnection();
     const projects = conn.collection('Projects')
-    const result = await projects.findOne({ _id: id });
+    const obj = ObjectId.createFromHexString(id);
+    const result = await projects.findOne({ _id: obj });
     await conn.client.close();
     return result !== null ? result : null;
 }
@@ -20,7 +22,6 @@ async function createProject(project) {
     const conn = await getConnection();
     const projects = conn.collection('Projects');
 
-    project._id = project._id.toString();
     console.log(project);
 
     const result = await projects.insertOne(project);
