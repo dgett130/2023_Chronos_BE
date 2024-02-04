@@ -1,5 +1,6 @@
 const { getConnection } = require('../config/mongoClient');
 const {ObjectId} = require("mongodb");
+const ApiResponse = require("../models/ApiResponse");
 
 async function getProjects() {
     const conn = await getConnection();
@@ -32,7 +33,23 @@ async function createProject(project) {
 async function updateProject(project) {
     const conn = await getConnection();
     const projects = conn.collection('Projects');
-    const result = await projects.updateOne({ _id: project._id }, { $set: project });
+    try {
+        project._id = ObjectId.createFromHexString(project._id);
+    } catch (e) {
+        return ApiResponse.error(e, project, "Invalid ID");
+    }
+    const result = await projects.updateOne(
+        { _id: project._id },
+        { $set: project }
+    ).then((result) => {
+        if (result.matchedCount === 0) {
+            return ApiResponse.notFound(null);
+        } else if (result.modifiedCount === 0) {
+            return ApiResponse.error(project, "No changes were made");
+        } else {
+            return ApiResponse.success(project);
+        }
+    });
     await conn.client.close();
     return result;
 }
