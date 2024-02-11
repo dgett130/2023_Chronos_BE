@@ -11,6 +11,7 @@ const auth = require("./middleware/midAuth");
 
 //Dichiarazione delle routes
 const projects_routes = require("./routes/projects");
+const project_types_routes = require("./routes/project-types");
 
 //Assegno il modulo express alla variabile app per utilizzarne le funzionalità
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/status',logger)
 app.use('/about',[logger, auth])
 app.use("/api/projects", logger, projects_routes);
+app.use("/api/project-types", logger, project_types_routes);
 
 /**** ROUTES ****/
 
