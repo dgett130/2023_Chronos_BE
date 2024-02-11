@@ -2,7 +2,7 @@ const { getConnection } = require('../config/mongoClient');
 const {ObjectId} = require("mongodb");
 const ApiResponse = require("../models/ApiResponse");
 
-async function getAllProjectType() {
+async function getAllProjectTypes() {
     const conn = await getConnection();
     const projectTypes = conn.collection('Project_types');
     const result = await projectTypes.find().toArray();
@@ -63,7 +63,7 @@ async function deleteProjectType(id) {
 }
 
 module.exports = {
-    getProjectType,
+    getProjectTypes,
     getAllProjectTypes,
     addProjectType,
     updateProjectType,
