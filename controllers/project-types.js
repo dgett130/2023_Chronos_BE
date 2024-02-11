@@ -13,7 +13,7 @@ const getAllProjectTypes = ((req, res) => {
 
 const getProjectType = ((req, res) => {
     let id = req.params.id;
-    let projectType = service.getProjectType(id);
+    let projectType = service.getProjectTypes(id);
     projectType.then((result) => {
         if (!result) {
             res.status(404).send("Project Type Not found!");

@@ -3,13 +3,13 @@ const router = express.Router();
 
 const {
     getProjectType,
-    getAllProjectType,
+    getAllProjectTypes,
     addProjectType,
     updateProjectType,
     deleteProjectType
 } = require('../controllers/project-types');
 
-router.get('/all', getAllProjectType);
+router.get('/all', getAllProjectTypes);
 router.get('/:id', getProjectType);
 router.post('/insert', addProjectType);
 router.put('/update', updateProjectType);
