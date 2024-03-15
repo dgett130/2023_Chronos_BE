@@ -8,7 +8,6 @@ const getAllProjectTypes = ((req, res) => {
         console.log(result);
         res.json(result);
     })
-
 })
 
 const getProjectType = ((req, res) => {

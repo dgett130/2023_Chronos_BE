@@ -2,8 +2,6 @@ const service = require('../services/projects');
 
 const getProjects = ((req, res) => {
     let projects = service.getProjects();
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3001');
-    res.set('Access-Control-Allow-Credentials', 'true');
     projects.then((result) => {
         console.log(result);
         res.json(result);
