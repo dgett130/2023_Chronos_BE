@@ -2,10 +2,7 @@ const service = require('../services/project-types');
 
 const getAllProjectTypes = ((req, res) => {
     let projectTypes = service.getAllProjectTypes();
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3001');
-    res.set('Access-Control-Allow-Credentials', 'true');
     projectTypes.then((result) => {
-        console.log(result);
         res.json(result);
     })
 })
@@ -17,7 +14,6 @@ const getProjectType = ((req, res) => {
         if (!result) {
             res.status(404).send("Project Type Not found!");
         } else {
-            console.log(result);
             res.status(200).json(result);
         }
     });

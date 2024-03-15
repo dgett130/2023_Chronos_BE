@@ -22,9 +22,6 @@ async function getProject(id) {
 async function createProject(project) {
     const conn = await getConnection();
     const projects = conn.collection('Projects');
-
-    console.log(project);
-
     const result = await projects.insertOne(project);
     await conn.client.close();
     return result;

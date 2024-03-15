@@ -2,10 +2,7 @@ const service = require('../services/records');
 
 const getRecords = ((req, res) => {
     let records = service.getRecords();
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3001');
-    res.set('Access-Control-Allow-Credentials', 'true');
     records.then((result) => {
-        console.log(result);
         res.json(result);
     })
 });
@@ -17,7 +14,18 @@ const getRecord = ((req, res) => {
         if (!result) {
             res.status(404).send("Record Not found!");
         } else {
-            console.log(result);
+            res.status(200).json(result);
+        }
+    });
+});
+
+const getRecordByMonth = ((req, res) => {
+    let month = req.params.month;
+    let record = service.getRecordByMonth(month);
+    record.then((result) => {
+        if (!result) {
+            res.status(404).send("Record Not found!");
+        } else {
             res.status(200).json(result);
         }
     });
@@ -50,6 +58,7 @@ const deleteRecord = ((req, res) => {
 module.exports = {
     getRecord,
     getRecords,
+    getRecordByMonth,
     createRecord,
     updateRecord,
     deleteRecord
