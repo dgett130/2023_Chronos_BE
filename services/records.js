@@ -19,12 +19,18 @@ async function getRecord(id) {
     return result !== null ? result : null;
 }
 
+async function getRecordByMonth(month) {
+    const conn = await getConnection();
+    const records = conn.collection('Records');
+    const result = await records.find({ 'datetime': {$regex: '\\d{4}-[' + month + ']-\\d{2} \\d{2}:\\d{2}:\\d{2}'} }).toArray();
+    console.log(result);
+    await conn.client.close();
+    return result;
+}
+
 async function createRecord(record) {
     const conn = await getConnection();
     const records = conn.collection('Records');
-
-    console.log(record);
-
     const result = await records.insertOne(record);
     await conn.client.close();
     return result;
@@ -65,6 +71,7 @@ async function deleteRecord(id) {
 module.exports = {
     getRecord,
     getRecords,
+    getRecordByMonth,
     createRecord,
     updateRecord,
     deleteRecord
